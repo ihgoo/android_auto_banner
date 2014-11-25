@@ -17,19 +17,15 @@ import android.view.MotionEvent;
  */
 public class AutoBannerViewPager extends ViewPager {
 
-	private final int BANNER_WHAT = 0;
-
 	private MyHandler handler;
 
 	private boolean isRunning = false;
 
-	private boolean stopScrollWhenTouch = false;
+	private boolean stopScrollWhenTouch = true;
 
-	private boolean isStoped;
+	public final static int METHOD_LEFT = 0;
 
-	private final int LEFT = 0;
-
-	private final int RIGHT = 1;
+	public final static int METHOD_RIGHT = 1;
 
 	private final int START_WHAT = 0;
 
@@ -37,7 +33,7 @@ public class AutoBannerViewPager extends ViewPager {
 
 	private int DEFAULT_ROLL_SPEED = 1500;
 
-	private int method = LEFT;
+	private int method = METHOD_LEFT;
 
 	private boolean smoothScroll = true;
 
@@ -56,15 +52,21 @@ public class AutoBannerViewPager extends ViewPager {
 	}
 
 	public void startScroll() {
+		this.isRunning = true;
 		handler.removeCallbacksAndMessages(null);
 		handler.sendEmptyMessageDelayed(START_WHAT, DEFAULT_ROLL_SPEED);
 	}
 
 	public void stopScroll() {
+		this.isRunning = false;
 		handler.removeCallbacksAndMessages(null);
 		handler.sendEmptyMessageDelayed(STOP_WHAT, DEFAULT_ROLL_SPEED);
 	}
 
+	public void setSpeed(int speed){
+		DEFAULT_ROLL_SPEED = speed;
+	}
+	
 	/**
 	 * 设置滚动的方向
 	 * 
@@ -84,6 +86,13 @@ public class AutoBannerViewPager extends ViewPager {
 	public void setSmoothScroll(boolean smoothScroll) {
 		this.smoothScroll = smoothScroll;
 	}
+	
+	/**
+	 * 当触摸到AutoBanner的时候停止自动轮播
+	 */
+	public void setStopScrollWhenTouch(){
+		this.stopScrollWhenTouch = false;
+	}
 
 	public void scroll() {
 		PagerAdapter adapter = getAdapter();
@@ -93,7 +102,7 @@ public class AutoBannerViewPager extends ViewPager {
 			return;
 		}
 
-		int nextItemPostion = (method == LEFT) ? --currentItem : ++currentItem;
+		int nextItemPostion = (method == METHOD_LEFT) ? --currentItem : ++currentItem;
 		if (nextItemPostion < 0) {
 			setCurrentItem(totalItem - 1, smoothScroll);
 		} else if (currentItem == totalItem) {
@@ -116,8 +125,7 @@ public class AutoBannerViewPager extends ViewPager {
 
 				break;
 			case STOP_WHAT:
-				handler.removeCallbacksAndMessages(null);
-				isRunning = false;
+				stopScroll();
 
 				break;
 			default:
@@ -133,10 +141,8 @@ public class AutoBannerViewPager extends ViewPager {
 
 		if (stopScrollWhenTouch) {
 			if (isRunning && MotionEvent.ACTION_DOWN == action) {
-				isStoped = true;
 				stopScroll();
-			} else if (isRunning && MotionEvent.ACTION_UP == action) {
-				isStoped = false;
+			} else if (!isRunning && MotionEvent.ACTION_UP == action) {
 				startScroll();
 			}
 		}
