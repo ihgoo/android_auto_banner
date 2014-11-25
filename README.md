@@ -1,19 +1,35 @@
 android_auto_banner
 ===================
 
-×Ô¶¯¹ö¶¯µÄÂÖ²¥Í¼
+è‡ªåŠ¨æ»šåŠ¨çš„è½®æ’­å›¾
 
+!(è½®æ’­å›¾)[http://ihgoo.qiniudn.com/auto_viewpager.GIF]
 
-* Ê¹ÓÃËµÃ÷
+* ä»‹ç»
 
   ````
-  »ùÓÚandroid.support.v4.view.ViewPagerÀàÍØÕ¹µÄ×Ô¶¯¹ö¶¯µÄÂÖ²¥Í¼
+  åŸºäºandroid.support.v4.view.ViewPagerç±»æ‹“å±•çš„è‡ªåŠ¨æ»šåŠ¨çš„è½®æ’­å›¾
   
-  ¿É×Ô¶¯¹ö¶¯µÄviewpager£¬´¥Ãşµ½Í¼Æ¬Ê±£¬×Ô¶¯¹ö¶¯ÊôĞÔÈ¡Ïû£¬Àë¿ªÍ¼Æ¬Ê±£¬ÓÖ¿ªÊ¼×Ô¶¯¹ö¶¯
+  å¯è‡ªåŠ¨æ»šåŠ¨çš„viewpagerï¼Œè§¦æ‘¸åˆ°å›¾ç‰‡æ—¶ï¼Œè‡ªåŠ¨æ»šåŠ¨å±æ€§å–æ¶ˆï¼Œç¦»å¼€å›¾ç‰‡æ—¶ï¼Œåˆå¼€å§‹è‡ªåŠ¨æ»šåŠ¨
   ````
   
-* ·½·¨
+* ä½¿ç”¨è¯´æ˜
 
+
+  ````
+  åœ¨xmlé‡Œå®šä¹‰
+      <com.example.bannersipmle.AutoBannerViewPager
+        android:id="@+id/abv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+  ````
+  
+	* startScroll(); //å¼€å§‹æ»šåŠ¨
+	* setSpeed(500); //è®¾ç½®æ»šåŠ¨é€Ÿåº¦ï¼Œå•ä½æ¯«ç§’
+	* setSmoothScroll(false); //è®¾ç½®å¹³æ»‘æ»šåŠ¨
+	* setMethod(AutoBannerViewPager.METHOD_RIGHT); //è®¾ç½®æ»šåŠ¨æ–¹å‘
+	* setStopScrollWhenTouch //å½“è§¦æ‘¸åˆ°AutoBannerçš„æ—¶å€™åœæ­¢è‡ªåŠ¨è½®æ’­
+	
+	
 
   
-
