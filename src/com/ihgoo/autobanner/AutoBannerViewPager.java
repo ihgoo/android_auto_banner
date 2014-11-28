@@ -1,5 +1,6 @@
 package com.ihgoo.autobanner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +16,10 @@ import android.view.MotionEvent;
  * @author <a href="http://www.xunhou.me" target="_blank">Kelvin</a>
  *
  */
+@SuppressLint("HandlerLeak")
 public class AutoBannerViewPager extends ViewPager {
 
-	private MyHandler handler;
+	private MyHandler mHandler;
 
 	private boolean isRunning = false;
 
@@ -48,19 +50,19 @@ public class AutoBannerViewPager extends ViewPager {
 	}
 
 	private void init() {
-		handler = new MyHandler();
+		mHandler = new MyHandler();
 	}
 
 	public void startScroll() {
 		this.isRunning = true;
-		handler.removeCallbacksAndMessages(null);
-		handler.sendEmptyMessageDelayed(START_WHAT, DEFAULT_ROLL_SPEED);
+		mHandler.removeCallbacksAndMessages(null);
+		mHandler.sendEmptyMessageDelayed(START_WHAT, DEFAULT_ROLL_SPEED);
 	}
 
 	public void stopScroll() {
 		this.isRunning = false;
-		handler.removeCallbacksAndMessages(null);
-		handler.sendEmptyMessageDelayed(STOP_WHAT, DEFAULT_ROLL_SPEED);
+		mHandler.removeCallbacksAndMessages(null);
+		mHandler.sendEmptyMessageDelayed(STOP_WHAT, DEFAULT_ROLL_SPEED);
 	}
 
 	public void setSpeed(int speed){
@@ -121,7 +123,7 @@ public class AutoBannerViewPager extends ViewPager {
 			case START_WHAT:
 				scroll();
 				isRunning = true;
-				handler.sendEmptyMessageDelayed(START_WHAT, DEFAULT_ROLL_SPEED);
+				mHandler.sendEmptyMessageDelayed(START_WHAT, DEFAULT_ROLL_SPEED);
 
 				break;
 			case STOP_WHAT:

@@ -3,7 +3,7 @@ android_auto_banner
 
 自动滚动的轮播图
 
-!(轮播图)[http://ihgoo.qiniudn.com/auto_viewpager.GIF]
+![轮播图](http://ihgoo.qiniudn.com/auto_viewpager.GIF)
 
 * 介绍
 
